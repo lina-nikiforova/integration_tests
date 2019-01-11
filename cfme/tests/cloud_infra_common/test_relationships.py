@@ -307,6 +307,24 @@ def test_provider_refresh_relationship(provider, setup_provider):
     wait_for_relationship_refresh(provider)
 
 
+@pytest.mark.rhv2
+@pytest.mark.provider([InfraProvider])
+def test_host_refresh_relationships(provider, setup_provider):
+    """ Test that host refresh doesn't fail
+
+    https://bugzilla.redhat.com/show_bug.cgi?id=1658240
+
+    Polarion:
+        assignee: ghubale
+        casecomponent: infra
+        caseimportance: high
+        initialEstimate: 1/8h
+    """
+    host = provider.hosts.all()[0]
+    host.refresh(cancel=True)
+    wait_for_relationship_refresh(provider)
+
+
 @pytest.mark.manual
 @pytest.mark.tier(1)
 def test_inventory_refresh_westindia_azure():
