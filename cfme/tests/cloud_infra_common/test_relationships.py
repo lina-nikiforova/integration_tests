@@ -319,6 +319,10 @@ def test_host_refresh_relationships(provider, setup_provider):
         casecomponent: infra
         caseimportance: high
         initialEstimate: 1/8h
+        testSteps:
+            1. Go to a host summary page in cfme
+            2. From configuration -> select "Refresh Relationships and Power State"
+            3. No error, host inventory properly refreshes
     """
     host = provider.hosts.all()[0]
     host.refresh(cancel=True)
